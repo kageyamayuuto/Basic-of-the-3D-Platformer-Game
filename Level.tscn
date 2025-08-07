@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://cexixhouyoub4"]
+
+[ext_resource type="PackedScene" uid="uid://cbajlwrlex4tu" path="res://player.tscn" id="1_0srpb"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sy18b"]
+size = Vector2(20, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_paube"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="Environment" id="Environment_p0dii"]
+background_mode = 2
+tonemap_mode = 2
+glow_enabled = true
+glow_normalized = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_sy18b")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_paube")
+
+[node name="Player" parent="." instance=ExtResource("1_0srpb")]
+top_level = true
+linear_damp = 3.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.991482, -0.0774828, -0.104695, -0.121181, 0.843416, 0.523417, 0.0477452, 0.531645, -0.84562, 0, 3.98408, -8.86946)
+shadow_enabled = true
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p0dii")
